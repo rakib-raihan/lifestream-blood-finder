@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import AppButton from "../components/AppButton";
 import AppTextInput from "../components/AppTextInput";
 import AppHeader from "../components/AppHeader";
@@ -7,7 +7,7 @@ import AppSwitch from "../components/AppSwitch";
 import AppPicker from "../components/AppPicker";
 import { container } from "../config/Styles";
 
-const Register = () => {
+const Register = ({ navigation }) => {
   const bloodGroups = [
     { label: "A+", value: 1 },
     { label: "A-", value: 2 },
@@ -21,7 +21,9 @@ const Register = () => {
 
   const [bloogGroup, setBloodGroup] = useState(bloodGroups[0]);
 
-  const onClick = () => {};
+  const onClick = () => {
+    navigation.navigate("Login");
+  };
 
   const onValueChange = () => {};
 
@@ -29,15 +31,6 @@ const Register = () => {
     <ScrollView>
       <View style={[container.center, { paddingBottom: 30, paddingTop: 30 }]}>
         <View style={container.view}>
-          <Image
-            style={{
-              width: 100,
-              height: 100,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            source={require("../assets/images/logo.jpg")}
-          />
           <AppHeader title="Create An Account" />
           <AppTextInput label="Name" placeholder="Enter your full name" />
           <AppPicker

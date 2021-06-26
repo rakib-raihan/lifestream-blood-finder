@@ -5,9 +5,9 @@ import AppTextInput from "../components/AppTextInput";
 import AppHeader from "../components/AppHeader";
 import { container } from "../config/Styles";
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const handleClick = () => {
-    console.log("cccc");
+    navigation.navigate("Home");
   };
 
   return (

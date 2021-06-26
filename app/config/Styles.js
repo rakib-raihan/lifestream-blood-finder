@@ -61,13 +61,15 @@ const appHeader = StyleSheet.create({
 const appButton = StyleSheet.create({
   primaryContainer: {
     backgroundColor: Colors.red,
-    padding: 10,
+    padding: 12,
     alignItems: "center",
     borderRadius: 5,
+    marginBottom: 10,
   },
   primaryText: {
     color: Colors.white,
     letterSpacing: 2,
+    fontSize: 16,
   },
   secContainer: {
     borderColor: Colors.pink,
@@ -79,6 +81,7 @@ const appButton = StyleSheet.create({
   secText: {
     color: Colors.black,
     letterSpacing: 2,
+    fontSize: 16,
   },
 });
 
@@ -157,7 +160,7 @@ const appRequestItem = StyleSheet.create({
     height: 85,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: Colors.red
+    backgroundColor: Colors.red,
   },
   bloodGroupText: {
     fontSize: 30,
@@ -212,14 +215,14 @@ const appRequestItem = StyleSheet.create({
   m_bloodGroup: {
     fontSize: 30,
     fontWeight: "700",
-    color: Colors.white
+    color: Colors.white,
   },
   m_infoItem: {
     flexDirection: "row",
     padding: 10,
     backgroundColor: Colors.lightGray,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.darkGray
+    borderBottomColor: Colors.darkGray,
   },
   m_infoTitleContainer: {
     width: "40%",
@@ -237,6 +240,38 @@ const appRequestItem = StyleSheet.create({
   },
 });
 
+const welcomeScreen = StyleSheet.create({
+  background: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  logoContainer: {
+    position: "absolute",
+    top: -120,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logo: {
+    width: 80,
+    height: 80,
+    marginBottom: 10,
+  },
+  logoText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    fontStyle: "italic",
+  },
+  buttonContainer: {
+    width: "70%",
+    marginBottom: 20,
+  },
+});
+
 export {
   splashScreen,
   appTextInput,
@@ -245,5 +280,6 @@ export {
   appButton,
   appSwitch,
   appPicker,
-  appRequestItem
+  appRequestItem,
+  welcomeScreen,
 };
