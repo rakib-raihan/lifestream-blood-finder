@@ -1,28 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, ScrollView } from "react-native";
 import AppButton from "../components/AppButton";
 import AppTextInput from "../components/AppTextInput";
 import AppHeader from "../components/AppHeader";
 import AppSwitch from "../components/AppSwitch";
 import AppPicker from "../components/AppPicker";
+
 import { container } from "../config/Styles";
+import { getAuthContext } from "../auth/Auth";
+import { bloodGroups, divisions, districts } from "../config/Data";
 
 const Register = ({ navigation }) => {
-  const bloodGroups = [
-    { label: "A+", value: 1 },
-    { label: "A-", value: 2 },
-    { label: "B+", value: 3 },
-    { label: "B-", value: 4 },
-    { label: "AB+", value: 5 },
-    { label: "AB-", value: 6 },
-    { label: "O+", value: 7 },
-    { label: "O-", value: 8 },
-  ];
-
+  const { register } = getAuthContext();
   const [bloogGroup, setBloodGroup] = useState(bloodGroups[0]);
+  const [division, setDivision] = useState(divisions[0]);
+  const [districtList, setDistrictList] = useState(districts["1"]);
+  const [district, setDistrict] = useState(districtList[0]);
 
-  const onClick = () => {
-    navigation.navigate("Login");
+  const onRegister = async () => {
+    await register("test2@mail.com", "123456");
+  };
+
+  const onSelectDivision = (division) => {
+    setDivision(division);
+    setDistrictList(districts[division.value]);
   };
 
   const onValueChange = () => {};
@@ -55,22 +56,22 @@ const Register = ({ navigation }) => {
             placeholder="Enter your password"
           />
           <AppPicker
-            title="District"
-            icon="chevron-down"
-            iconsize={16}
-            dataset={bloodGroups}
-            selectedItem={bloogGroup}
-            onSelectItem={(item) => setBloodGroup(item)}
-          />
-          <AppPicker
             title="Division"
             icon="chevron-down"
             iconsize={16}
-            dataset={bloodGroups}
-            selectedItem={bloogGroup}
-            onSelectItem={(item) => setBloodGroup(item)}
+            dataset={divisions}
+            selectedItem={division}
+            onSelectItem={(item) => onSelectDivision(item)}
           />
-          <AppButton title="Register" onClick={onClick} />
+          <AppPicker
+            title="District"
+            icon="chevron-down"
+            iconsize={16}
+            dataset={districtList}
+            selectedItem={district}
+            onSelectItem={(item) => setDistrict(item)}
+          />
+          <AppButton title="Register" onClick={onRegister} />
         </View>
       </View>
     </ScrollView>

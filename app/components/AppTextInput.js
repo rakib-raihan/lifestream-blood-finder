@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { appTextInput } from "../config/Styles";
 
-const AppTextInput = ({ label, placeholder, onChange, password = false }) => {
+const AppTextInput = ({
+  label,
+  placeholder,
+  onChange = null,
+  password = false,
+  value = "",
+}) => {
   const [focus, setFocus] = useState(false);
 
   return (
@@ -10,7 +16,8 @@ const AppTextInput = ({ label, placeholder, onChange, password = false }) => {
       <Text style={appTextInput.label}>{label}</Text>
       <TextInput
         placeholder={placeholder}
-        onChange={onChange}
+        onChangeText={(text) => onChange(text)}
+        defaultValue={value}
         style={focus ? appTextInput.active : appTextInput.input}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}

@@ -4,7 +4,7 @@ import { container } from "../config/Styles";
 
 const AppScreen = ({ children }) => {
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: 22 }}>{children}</SafeAreaView>
+    <SafeAreaView style={{ flex: 1, paddingTop: 28 }}>{children}</SafeAreaView>
   );
 };
 
