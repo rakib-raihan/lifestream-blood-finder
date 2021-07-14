@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Pressable, Modal, Button, FlatList } from "react-native";
 import { appPicker } from "../config/Styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -12,6 +12,7 @@ const AppPicker = ({
   dataset,
   selectedItem,
   onSelectItem,
+  dependency = null,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -28,13 +29,14 @@ const AppPicker = ({
                   : appPicker.selectedItemSimple
               }
             >
-              {selectedItem ? selectedItem.label : "A+"}
+              {selectedItem ? selectedItem.label : "Select Item"}
             </Text>
             <MaterialCommunityIcons name={icon} size={iconsize} />
           </View>
         </View>
         <Modal visible={modalVisible} animationType="slide">
           <FlatList
+            extraData={dependency}
             data={dataset}
             keyExtractor={(item) => item.value.toString()}
             renderItem={({ item }) => (

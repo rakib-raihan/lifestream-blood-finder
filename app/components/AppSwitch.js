@@ -16,7 +16,7 @@ const AppSwitch = ({ title, value, onValueChange }) => {
         thumbColor={isEnabled ? Colors.red : Colors.darkGray}
         ios_backgroundColor={Colors.darkGray}
         onValueChange={toggleSwitch}
-        onChange={onValueChange(isEnabled)}
+        onChange={() => onValueChange(!isEnabled)}
         value={isEnabled}
       />
     </View>

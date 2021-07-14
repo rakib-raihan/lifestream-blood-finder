@@ -5,7 +5,6 @@ import Requests from "../screens/Requests";
 import CreateRequest from "../screens/CreateRequest";
 import MyRequests from "../screens/MyRequests";
 import Profile from "../screens/Profile";
-import Notifications from "../screens/Notifications";
 import AppIcon from "../components/AppIcon";
 
 const Tab = createBottomTabNavigator();
@@ -38,13 +37,6 @@ const IndexNav = () => {
         component={CreateRequest}
         options={{
           tabBarIcon: () => <AppIcon icon="plus-circle-outline" size={25} />,
-        }}
-      />
-      <Tab.Screen
-        name="Notifications"
-        component={Notifications}
-        options={{
-          tabBarIcon: () => <AppIcon icon="bell-outline" size={25} />,
         }}
       />
       <Tab.Screen

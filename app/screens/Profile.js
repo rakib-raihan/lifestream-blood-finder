@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
+import { getAuthContext } from "../auth/Auth";
+import AppButton from "../components/AppButton";
 import AppScreen from "../components/AppScreen";
 import { container } from "../config/Styles";
+import LoadingScreen from "../components/LoadingScreen";
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
+  const [loading, setLoading] = useState(false);
+  const { logout } = getAuthContext();
+
+  useEffect(() => {
+    (async function () {
+      // Async storage sync data
+    })();
+  });
+
+  const onLogout = async () => {
+    setLoading(true);
+    const { success, error } = await logout();
+    if (success) {
+      navigation.navigate("Welcome");
+    }
+    setLoading(false);
+  };
+
   return (
     <AppScreen>
       <View style={container.top}>
@@ -33,7 +54,9 @@ const Profile = () => {
             <Text>Yes</Text>
           </View>
         </View>
+        <AppButton title="Logout" onClick={onLogout} />
       </View>
+      <LoadingScreen loading={loading} />
     </AppScreen>
   );
 };
