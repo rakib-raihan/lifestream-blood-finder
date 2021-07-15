@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { View, ScrollView, Text } from "react-native";
+import { View, ScrollView, Text, Alert } from "react-native";
 import AppButton from "../components/AppButton";
 import AppTextInput from "../components/AppTextInput";
 import AppHeader from "../components/AppHeader";
 import AppSwitch from "../components/AppSwitch";
 import AppPicker from "../components/AppPicker";
+import LoadingScreen from "../components/LoadingScreen";
 
 import { container } from "../config/Styles";
 import { getAuthContext } from "../auth/Auth";
@@ -24,6 +25,7 @@ const Register = ({ navigation }) => {
 
   const { register } = getAuthContext();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [name, setName] = useState("");
   const [bloogGroup, setBloodGroup] = useState(bloodGroups[0]);
@@ -36,6 +38,7 @@ const Register = ({ navigation }) => {
   const [district, setDistrict] = useState(districtList[0]);
 
   const onRegister = async () => {
+    setLoading(true);
     userInfo.name = name;
     userInfo.bloodGroup = bloogGroup.label;
     userInfo.isDonor = isDonor;
@@ -48,11 +51,16 @@ const Register = ({ navigation }) => {
     if (valid()) {
       const { success, error } = await register(userInfo);
       if (success) {
-        navigation.navigate("Home");
+        Alert.alert(
+          "Registration Successfull!",
+          "Please Login using Email & Password."
+        );
+        navigation.navigate("Login");
       } else {
         setError(error);
       }
     }
+    setLoading(false);
   };
 
   const valid = () => {
@@ -146,6 +154,7 @@ const Register = ({ navigation }) => {
           )}
           <AppButton title="Register" onClick={onRegister} />
         </View>
+        <LoadingScreen loading={loading} />
       </View>
     </ScrollView>
   );

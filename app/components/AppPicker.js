@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, Pressable, Modal, Button, FlatList } from "react-native";
 import { appPicker } from "../config/Styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";

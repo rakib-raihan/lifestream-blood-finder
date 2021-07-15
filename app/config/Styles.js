@@ -55,6 +55,7 @@ const appHeader = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 20,
+    marginTop: 20,
   },
 });
 
@@ -65,6 +66,7 @@ const appButton = StyleSheet.create({
     alignItems: "center",
     borderRadius: 5,
     marginBottom: 10,
+    width: "100%",
   },
   primaryText: {
     color: Colors.white,
@@ -198,7 +200,7 @@ const appRequestItem = StyleSheet.create({
     margin: 20,
   },
   m_info: {
-    width: "80%",
+    width: "100%",
     maxWidth: 280,
     marginBottom: 20,
   },
@@ -219,17 +221,17 @@ const appRequestItem = StyleSheet.create({
   },
   m_infoItem: {
     flexDirection: "row",
-    padding: 10,
-    backgroundColor: Colors.lightGray,
+    paddingTop: 15,
+    paddingBottom: 15,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.darkGray,
+    borderBottomColor: Colors.lightGray,
   },
   m_infoTitleContainer: {
     width: "40%",
-    alignItems: "flex-end",
   },
   m_infoDescContainer: {
     width: "60%",
+    alignItems: "flex-end",
   },
   m_infoTitle: {
     color: "gray",
@@ -237,6 +239,7 @@ const appRequestItem = StyleSheet.create({
   },
   m_infoDesc: {
     fontWeight: "bold",
+    textAlign: "right",
   },
 });
 

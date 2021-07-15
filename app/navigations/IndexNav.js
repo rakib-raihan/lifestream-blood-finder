@@ -3,9 +3,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Requests from "../screens/Requests";
 import CreateRequest from "../screens/CreateRequest";
-import MyRequests from "../screens/MyRequests";
 import Profile from "../screens/Profile";
 import AppIcon from "../components/AppIcon";
+import Donors from "../screens/Donors";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,10 +26,10 @@ const IndexNav = () => {
         }}
       />
       <Tab.Screen
-        name="MyRequests"
-        component={MyRequests}
+        name="Donors"
+        component={Donors}
         options={{
-          tabBarIcon: () => <AppIcon icon="format-list-bulleted" size={25} />,
+          tabBarIcon: () => <AppIcon icon="account-search-outline" size={25} />,
         }}
       />
       <Tab.Screen
@@ -43,7 +43,7 @@ const IndexNav = () => {
         name="Profile"
         component={Profile}
         options={{
-          tabBarIcon: () => <AppIcon icon="account-outline" size={25} />,
+          tabBarIcon: () => <AppIcon icon="cog-outline" size={25} />,
         }}
       />
     </Tab.Navigator>

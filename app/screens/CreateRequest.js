@@ -156,8 +156,8 @@ const CreateRequest = () => {
             iconsize={16}
             onSelect={(_date) => setDate(_date)}
           />
+          <AppButton title="Post Blood Request" onClick={onCreateRequest} />
         </View>
-        <AppButton title="Post Blood Request" onClick={onCreateRequest} />
       </View>
       <LoadingScreen loading={loading} />
     </AppScreen>

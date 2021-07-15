@@ -12,6 +12,7 @@ if (!firebase.apps.length) {
 
 const AuthContext = createContext();
 export const getAuthContext = () => useContext(AuthContext);
+export const convertToDate = (date) => date.toDate().toLocaleDateString();
 
 const requestBlood = async ({
   bloog_group,
@@ -116,9 +117,6 @@ const register = async ({
           district,
           division,
         });
-        const { user } = userData;
-        AsyncStorage.setItem("@user", JSON.stringify(user));
-        AsyncStorage.setItem("@is_user", "1");
       });
     return { success: true, error: null };
   } catch (error) {
@@ -126,9 +124,44 @@ const register = async ({
   }
 };
 
+const getRequests = async () => {
+  let requests = {};
+  try {
+    await firebase
+      .firestore()
+      .collection("requests")
+      .get()
+      .then((data) => {
+        requests = data.docs.map((doc) => doc.data());
+      });
+    return { success: true, error: null, requests: requests };
+  } catch (error) {
+    return { success: true, error: "Error getting data!" };
+  }
+};
+
+const getDonors = async () => {
+  let requests = {};
+  try {
+    await firebase
+      .firestore()
+      .collection("users")
+      .where("isDonor", "==", true)
+      .get()
+      .then((data) => {
+        requests = data.docs.map((doc) => doc.data());
+      });
+    return { success: true, error: null, requests: requests };
+  } catch (error) {
+    return { success: true, error: "Error getting data!" };
+  }
+};
+
 const Auth = ({ children }) => {
   return (
-    <AuthContext.Provider value={{ login, logout, register, requestBlood }}>
+    <AuthContext.Provider
+      value={{ login, logout, register, requestBlood, getRequests, getDonors }}
+    >
       {children}
     </AuthContext.Provider>
   );

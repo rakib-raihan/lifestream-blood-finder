@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { View, FlatList, Alert } from "react-native";
 import { getAuthContext } from "../auth/Auth";
+import AppDonorItem from "../components/AppDonorItem";
 import AppPicker from "../components/AppPicker";
-import AppRequestItem from "../components/AppRequestItem";
 import AppScreen from "../components/AppScreen";
 import LoadingScreen from "../components/LoadingScreen";
 import { bloodGroups, divisions, districts } from "../config/Data";
 
-const Requests = () => {
+const Donors = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
@@ -16,7 +16,7 @@ const Requests = () => {
   const [districtList, setDistrictList] = useState(districts["1"]);
   const [district, setDistrict] = useState(districtList[0]);
 
-  const { getRequests } = getAuthContext();
+  const { getDonors } = getAuthContext();
 
   const onSelectDivision = (division) => {
     setDivision(division);
@@ -31,9 +31,10 @@ const Requests = () => {
 
   const fetchData = async () => {
     setLoading(true);
-    const { success, error, requests } = await getRequests();
+    const { success, error, requests } = await getDonors();
     if (success) {
       setData(requests);
+      console.log(data);
     } else {
       Alert.alert("Error!", error);
     }
@@ -85,8 +86,8 @@ const Requests = () => {
         </View>
         <FlatList
           data={data}
-          keyExtractor={(item) => item.created_at.nanoseconds.toString()}
-          renderItem={({ item }) => <AppRequestItem data={item} />}
+          keyExtractor={(item) => item.phone.toString()}
+          renderItem={({ item }) => <AppDonorItem data={item} />}
           showsVerticalScrollIndicator={false}
         />
         <LoadingScreen loading={loading} />
@@ -95,4 +96,4 @@ const Requests = () => {
   );
 };
 
-export default Requests;
+export default Donors;

@@ -1,6 +1,5 @@
 import React from "react";
 import { SafeAreaView } from "react-native";
-import { container } from "../config/Styles";
 
 const AppScreen = ({ children }) => {
   return (
