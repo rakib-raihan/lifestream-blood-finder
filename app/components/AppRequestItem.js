@@ -27,11 +27,21 @@ const AppRequestItem = ({ data }) => {
       </View>
       <Modal visible={modalVisible} animationType="slide">
         <View style={appRequestItem.m_container}>
+          <Text
+            style={{
+              fontSize: 22,
+              marginTop: 30,
+              marginBottom: 30,
+              fontWeight: "700",
+            }}
+          >
+            Patient Information
+          </Text>
           <View style={appRequestItem.m_headerContainer}>
             <View style={appRequestItem.m_header}>
               <Image
                 style={appRequestItem.m_image}
-                source={require("../assets/images/logo.jpg")}
+                source={require("../assets/images/logo.png")}
               />
             </View>
             <View

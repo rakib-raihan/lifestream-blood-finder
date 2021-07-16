@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import * as SplashScreen from "expo-splash-screen";
 
 import Register from "../screens/Register";
 import Login from "../screens/Login";
 import Welcome from "../screens/Welcome";
 import IndexNav from "./IndexNav";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import SplashScreen from "../screens/SplashScreen";
 
 const Stack = createStackNavigator();
 
@@ -18,10 +18,7 @@ class WelcomeNav extends Component {
   };
 
   async componentDidMount() {
-    setTimeout(this.initData, 1500);
-  }
-
-  initData = async () => {
+    await SplashScreen.preventAutoHideAsync();
     const isUser = await AsyncStorage.getItem("@is_user");
     if (isUser === "1") {
       this.setState({
@@ -33,14 +30,13 @@ class WelcomeNav extends Component {
         loading: false,
       });
     }
-  };
+    await SplashScreen.hideAsync();
+  }
 
   render() {
     const { loading, user } = this.state;
 
-    return loading ? (
-      <SplashScreen />
-    ) : (
+    return loading ? null : (
       <NavigationContainer>
         <Stack.Navigator initialRouteName={user ? "Home" : "Welcome"}>
           <Stack.Screen

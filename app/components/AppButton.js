@@ -6,7 +6,9 @@ const AppButton = ({ title, onClick = null, type = "primary" }) => {
   return (
     <TouchableOpacity
       style={
-        type == "primary" ? appButton.primaryContainer : appButton.secContainer
+        type == "primary"
+          ? appButton.primaryContainer
+          : [appButton.secContainer, { marginBottom: 10 }]
       }
       onPress={onClick}
       activeOpacity={0.5}

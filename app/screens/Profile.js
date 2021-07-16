@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Alert, Linking } from "react-native";
 import { getAuthContext } from "../auth/Auth";
 import AppButton from "../components/AppButton";
 import AppScreen from "../components/AppScreen";
@@ -12,6 +12,9 @@ const Profile = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({});
   const { logout } = getAuthContext();
+
+  const [haveUpdate, setUpdate] = useState([]);
+  const { checkForUpdate } = getAuthContext();
 
   useEffect(() => {
     (async function () {
@@ -38,6 +41,38 @@ const Profile = ({ navigation }) => {
     setLoading(false);
   };
 
+  const onPressDownload = () => {
+    Linking.openURL(haveUpdate.download_link);
+  };
+
+  const onCheckForUpdate = async () => {
+    setLoading(true);
+    const { success, update } = await checkForUpdate();
+    setUpdate(update);
+    if (success && haveUpdate.available) {
+      Alert.alert(
+        haveUpdate.header,
+        haveUpdate.message,
+        [
+          {
+            text: "Download",
+            onPress: () => onPressDownload(),
+          },
+          {
+            text: "Not Now",
+          },
+        ],
+        { cancelable: false }
+      );
+    } else {
+      Alert.alert(
+        "No Update Available!",
+        "We are working on improvement & adding new features. You will recieve an update soon"
+      );
+    }
+    setLoading(false);
+  };
+
   return (
     <AppScreen>
       <View style={container.top}>
@@ -45,7 +80,7 @@ const Profile = ({ navigation }) => {
           <AppHeader title="My Profile" />
           <View style={profile.dpContainer}>
             <Image
-              source={require("../assets/images/profile.png")}
+              source={require("../assets/images/logo.png")}
               style={profile.dp}
             />
           </View>
@@ -93,6 +128,11 @@ const Profile = ({ navigation }) => {
               </Text>
             </View>
           </View>
+          <AppButton
+            title="Check for Update"
+            onClick={onCheckForUpdate}
+            type="secondary"
+          />
           <AppButton title="Logout" onClick={onLogout} />
         </View>
       </View>

@@ -6,16 +6,14 @@ import { welcomeScreen } from "../config/Styles";
 const Welcome = ({ navigation }) => {
   return (
     <ImageBackground
-      source={require("../assets/images/background.png")}
+      source={require("../assets/images/background.jpg")}
       style={welcomeScreen.background}
     >
       <View style={welcomeScreen.logoContainer}>
         <Image
-          source={require("../assets/images/logo.jpg")}
+          source={require("../assets/images/logo.png")}
           style={welcomeScreen.logo}
         />
-        <Text style={welcomeScreen.logoText}>Donate Blood</Text>
-        <Text style={welcomeScreen.logoText}>Save Life!</Text>
       </View>
 
       <View style={welcomeScreen.buttonContainer}>

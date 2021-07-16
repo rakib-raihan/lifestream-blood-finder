@@ -10,6 +10,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import { container } from "../config/Styles";
 import { getAuthContext } from "../auth/Auth";
 import { bloodGroups, divisions, districts } from "../config/Data";
+import AppScreen from "../components/AppScreen";
 
 const Register = ({ navigation }) => {
   const userInfo = {
@@ -89,74 +90,78 @@ const Register = ({ navigation }) => {
   };
 
   return (
-    <ScrollView>
-      <View style={[container.center, { paddingBottom: 30, paddingTop: 30 }]}>
-        <View style={container.view}>
-          <AppHeader title="Create An Account" />
-          <AppTextInput
-            value={name}
-            onChange={(_name) => setName(_name)}
-            label="Name"
-            placeholder="Enter your full name"
-          />
-          <AppPicker
-            type="blood"
-            title="Blood Group"
-            icon="chevron-down"
-            iconsize={16}
-            dataset={bloodGroups}
-            selectedItem={bloogGroup}
-            onSelectItem={(item) => setBloodGroup(item)}
-          />
-          <AppSwitch
-            title="I am a Donor"
-            value={true}
-            onValueChange={(isDonor) => setIsDonor(isDonor)}
-          />
-          <AppTextInput
-            value={phone}
-            onChange={(_phone) => setPhone(_phone)}
-            label="Phone"
-            placeholder="Enter your phone number"
-          />
-          <AppTextInput
-            value={email}
-            onChange={(_email) => setEmail(_email)}
-            label="Email"
-            placeholder="Enter your email"
-          />
-          <AppTextInput
-            value={password}
-            onChange={(_password) => setPassword(_password)}
-            password={true}
-            label="Password"
-            placeholder="Enter your password"
-          />
-          <AppPicker
-            title="Division"
-            icon="chevron-down"
-            iconsize={16}
-            dataset={divisions}
-            selectedItem={division}
-            onSelectItem={(item) => onSelectDivision(item)}
-          />
-          <AppPicker
-            dependency={districtList[0]}
-            title="District"
-            icon="chevron-down"
-            iconsize={16}
-            dataset={districtList}
-            selectedItem={district}
-            onSelectItem={(item) => setDistrict(item)}
-          />
-          {!!error && (
-            <Text style={{ color: "#ff0000", marginBottom: 15 }}>{error}</Text>
-          )}
-          <AppButton title="Register" onClick={onRegister} />
+    <AppScreen>
+      <ScrollView>
+        <View style={[container.center, { paddingBottom: 30 }]}>
+          <View style={container.view}>
+            <AppHeader title="Create An Account" />
+            <AppTextInput
+              value={name}
+              onChange={(_name) => setName(_name)}
+              label="Name"
+              placeholder="Enter your full name"
+            />
+            <AppPicker
+              type="blood"
+              title="Blood Group"
+              icon="chevron-down"
+              iconsize={16}
+              dataset={bloodGroups}
+              selectedItem={bloogGroup}
+              onSelectItem={(item) => setBloodGroup(item)}
+            />
+            <AppSwitch
+              title="I am a Donor"
+              value={true}
+              onValueChange={(isDonor) => setIsDonor(isDonor)}
+            />
+            <AppTextInput
+              value={phone}
+              onChange={(_phone) => setPhone(_phone)}
+              label="Phone"
+              placeholder="Enter your phone number"
+            />
+            <AppTextInput
+              value={email}
+              onChange={(_email) => setEmail(_email)}
+              label="Email"
+              placeholder="Enter your email"
+            />
+            <AppTextInput
+              value={password}
+              onChange={(_password) => setPassword(_password)}
+              password={true}
+              label="Password"
+              placeholder="Enter your password"
+            />
+            <AppPicker
+              title="Division"
+              icon="chevron-down"
+              iconsize={16}
+              dataset={divisions}
+              selectedItem={division}
+              onSelectItem={(item) => onSelectDivision(item)}
+            />
+            <AppPicker
+              dependency={districtList[0]}
+              title="District"
+              icon="chevron-down"
+              iconsize={16}
+              dataset={districtList}
+              selectedItem={district}
+              onSelectItem={(item) => setDistrict(item)}
+            />
+            {!!error && (
+              <Text style={{ color: "#ff0000", marginBottom: 15 }}>
+                {error}
+              </Text>
+            )}
+            <AppButton title="Register" onClick={onRegister} />
+          </View>
+          <LoadingScreen loading={loading} />
         </View>
-        <LoadingScreen loading={loading} />
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </AppScreen>
   );
 };
 

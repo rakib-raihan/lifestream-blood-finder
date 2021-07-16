@@ -34,7 +34,6 @@ const Donors = () => {
     const { success, error, requests } = await getDonors();
     if (success) {
       setData(requests);
-      console.log(data);
     } else {
       Alert.alert("Error!", error);
     }

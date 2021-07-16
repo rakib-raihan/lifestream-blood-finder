@@ -71,23 +71,17 @@ const login = async ({ email, password }) => {
 
     return { success: true, error: null };
   } catch (error) {
-    AsyncStorage.setItem("@user", "");
-    AsyncStorage.setItem("@is_user", "0");
+    AsyncStorage.removeItem("@user");
+    AsyncStorage.removeItem("@is_user");
     return { success: false, error: error.message };
   }
 };
 
 const logout = async () => {
   try {
-    AsyncStorage.setItem("@user", "");
-    AsyncStorage.setItem("@is_user", "0");
-    await firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        AsyncStorage.setItem("@user", "");
-        AsyncStorage.setItem("@is_user", "0");
-      });
+    AsyncStorage.removeItem("@user");
+    AsyncStorage.removeItem("@is_user");
+    await firebase.auth().signOut();
     return { success: true, error: null };
   } catch (error) {
     return { success: false, error: error.message };
@@ -157,10 +151,35 @@ const getDonors = async () => {
   }
 };
 
+const checkForUpdate = async () => {
+  let update = {};
+  try {
+    await firebase
+      .firestore()
+      .collection("config")
+      .doc("update")
+      .get()
+      .then((data) => {
+        update = data.data();
+      });
+    return { success: true, error: null, update: update };
+  } catch (error) {
+    return { success: true, error: "Error getting data!" };
+  }
+};
+
 const Auth = ({ children }) => {
   return (
     <AuthContext.Provider
-      value={{ login, logout, register, requestBlood, getRequests, getDonors }}
+      value={{
+        login,
+        logout,
+        register,
+        requestBlood,
+        getRequests,
+        getDonors,
+        checkForUpdate,
+      }}
     >
       {children}
     </AuthContext.Provider>

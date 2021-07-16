@@ -55,7 +55,6 @@ const appHeader = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 20,
-    marginTop: 20,
   },
 });
 
@@ -260,14 +259,9 @@ const welcomeScreen = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    width: 80,
-    height: 80,
+    width: 160,
+    height: 160,
     marginBottom: 10,
-  },
-  logoText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    fontStyle: "italic",
   },
   buttonContainer: {
     width: "70%",

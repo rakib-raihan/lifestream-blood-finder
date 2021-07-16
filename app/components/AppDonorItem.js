@@ -40,7 +40,7 @@ const AppDonorItem = ({ data }) => {
             <View style={appRequestItem.m_header}>
               <Image
                 style={appRequestItem.m_image}
-                source={require("../assets/images/logo.jpg")}
+                source={require("../assets/images/logo.png")}
               />
             </View>
             <View
